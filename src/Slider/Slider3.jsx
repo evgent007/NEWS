@@ -8,18 +8,19 @@ import img from './word-news.jpg'
 import { getNews } from '../Api'
 
 export default function Slider3() {
-  const [sidebar, setSidebar] = useState()
-  const [mainSlide, setMainSlide] = useState()
-  const [height, setHeight] = useState()
-
   const [data, setData] = useState(null)
   const [page, setPage] = useState(0)
+  const [sidebar, setSidebar] = useState()
+  const [slider, setSlider] = useState()
+  const [height, setHeight] = useState()
 
-  if (data) {
-    console.log('1data=', data)
-  }
+
+  // if (data) {
+  //   console.log('1data=', data, 'slider=', slider, 'height=', height, 'sidebar=', sidebar)
+  // }
 
   useEffect(() => {
+
     getNews(page)
       .then(dat => setData(dat))
       .catch(error => console.log('error==>', error.message))
@@ -28,8 +29,7 @@ export default function Slider3() {
   useEffect(() => {
     setHeight(document.querySelector(`.${styles.container}`).clientHeight)
     setSidebar(document.querySelector(`.${styles.sidebar}`))
-    setMainSlide(document.querySelector(`.${styles.mainSlide}`))
-    console.log('render')
+    setSlider(document.querySelector(`.${styles.slider}`))
   }, [height])
 
   return (
@@ -37,13 +37,12 @@ export default function Slider3() {
       <div className={styles.sidebar}>
         {data && data.results.map((d, i) => <Sidebar key={i} title={d.title} text={d.pubDate} url={d.image_url ? d.image_url : img} />)}
       </div>
-
-      <div className={styles.mainSlide}>
+      <div className={styles.slider}>
         {data &&
           [...data.results].reverse().map((d, i) => <Slide key={i} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
       </div>
-      {data && sidebar && mainSlide && height && (
-        <Button n={data.results.length} sidebar={sidebar} mainSlide={mainSlide} height={height} setPage={setPage} />
+      {data && sidebar && slider && height && (
+        <Button n={data.results.length} sidebar={sidebar} slider={slider} height={height} />
       )}
       {data && <Button2 setPage={setPage} page={data.nextPage} />}
     </div>

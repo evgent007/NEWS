@@ -46,7 +46,7 @@ body {
   padding: 0 50px;
 }
 
-.mainSlide {
+.slider {
   height: 100%;
   position: absolute;
   top: 0;
@@ -55,7 +55,7 @@ body {
   transition: transform 0.5s ease-in-out;
 }
 
-.mainSlide > div {
+.slider > div {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -101,7 +101,7 @@ button:focus {
 
 .container .controls .leftButton {
   padding: 15px 5px 15px 12px;
-  transform: translateY(-100%) translateX(-100%) ;
+  transform: translateY(-100%) translateX(-100%);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -113,7 +113,7 @@ button:focus {
   border-bottom-right-radius: 5px;
 }
 
-.slide h1{
+.slide h1 {
   color: #fff;
   text-align: center;
 }
@@ -121,9 +121,7 @@ button:focus {
   color: #fff;
   text-align: justify;
   padding: 10px;
-
 }
-
 
 .slide a {
   display: block;

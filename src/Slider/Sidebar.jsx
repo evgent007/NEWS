@@ -16,9 +16,6 @@ export default function Sidebar({ title, text, url }) {
       })
       .then(color => {
         setStyle({ backgroundColor: color.rgba })
-        // container.style.color = color.isDark ? '#fff' : '#000'
-
-        console.log('Average color', color, color.rgba)
       })
       .catch(e => {
         console.log(e)

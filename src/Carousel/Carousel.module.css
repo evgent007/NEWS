@@ -1,0 +1,33 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.item1 {
+  background-color: rgb(33, 17, 107);
+}
+.item2 {
+  background-color: rgb(15, 126, 59);
+}
+.item3 {
+  background-color: rgb(94, 15, 57);
+}
+
+.container {
+  margin: 4%;
+  height: 90%;
+  width: 90%;
+  overflow: hidden;
+}
+
+.pages {
+  /* margin: 10px; */
+  height: 100%;
+  display: flex;
+  transition: translate;
+  transition-property: transform;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+}

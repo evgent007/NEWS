@@ -1,11 +1,11 @@
 import styles from './Slider.module.css'
 
-export default function Button({ n, sidebar, mainSlide, height,setPage }) {
+export default function Button({ n, sidebar, slider, height}) {
   let activeSlideIndex = 0
   document.querySelector(`.${styles.sidebar}`).style.top = `-${(n - 1) * 100}vh`
 
   function changeSlide(direction) {
-    console.log('direct==',direction)
+
     if (direction === 'up') {
       activeSlideIndex++
       if (activeSlideIndex === n) {
@@ -23,9 +23,8 @@ export default function Button({ n, sidebar, mainSlide, height,setPage }) {
 
   const handleClick = function (d) {
     const ch = changeSlide(d)
-    console.log('ch===',ch)
     sidebar.style.transform = `translateY(${ch}px)`
-    mainSlide.style.transform = `translateY(-${ch}px)`
+    slider.style.transform = `translateY(-${ch}px)`
   }
 
   document.addEventListener('keydown', e => {

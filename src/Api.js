@@ -19,7 +19,7 @@ const option = {
 
 
 export async function getNews(page) {
-  const res = await fetch(API_news + query + `&page=${page}`, )
+  const res = await fetch(API_news + query + `&page=${page}` )
 
   return await res.json()
 }
