@@ -59,3 +59,4 @@ export default function Slider3() {
     </div>
   )
 }
+//   console.log('')
