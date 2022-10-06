@@ -1,13 +1,24 @@
 import React from 'react'
 import styles from './Slider.module.css'
 
-const Button2 = ({ setPage, page }) => {
+const Button2 = ({ setPage, page, setStyle }) => {
   function handleClick(f) {
     if (f === 'left') {
-      setPage(prev => prev - 1)
+      setStyle({
+        transform: `translateX(-900px)`,
+        opacity: 0,
+        transition: 'all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.4s',
+      })
+      setTimeout(() => setPage(prev => prev - 1), 900)
     }
     if (f === 'right') {
-      setPage(prev => prev + 1)
+      setStyle({
+        transform: `translateX(+900px)`,
+        opacity: 0,
+        transition: 'all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.4s',
+      })
+
+      setTimeout(() => setPage(prev => prev + 1), 900)
     }
   }
   return (
