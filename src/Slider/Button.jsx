@@ -1,11 +1,20 @@
 import styles from './Slider.module.css'
+import { useState, useEffect} from 'react'
 
-export default function Button({ n, sidebar, slider, height}) {
+export default function Button({ n }) {
+  const [sidebar, setSidebar] = useState()
+  const [slider, setSlider] = useState()
+  const [height, setHeight] = useState()
   let activeSlideIndex = 0
   document.querySelector(`.${styles.sidebar}`).style.top = `-${(n - 1) * 100}vh`
 
-  function changeSlide(direction) {
+  useEffect(() => {
+    setHeight(document.querySelector(`.${styles.container}`).clientHeight)
+    setSidebar(document.querySelector(`.${styles.sidebar}`))
+    setSlider(document.querySelector(`.${styles.slider}`))
+  }, [height])
 
+  function changeSlide(direction) {
     if (direction === 'up') {
       activeSlideIndex++
       if (activeSlideIndex === n) {
@@ -14,10 +23,11 @@ export default function Button({ n, sidebar, slider, height}) {
     } else if (direction === 'down') {
       activeSlideIndex--
       if (activeSlideIndex < 0) {
-        activeSlideIndex = n-1
-        console.log('setPage',activeSlideIndex)
+        activeSlideIndex = n - 1
       }
     }
+    console.log('activeSlideIndex', activeSlideIndex)
+
     return activeSlideIndex * height
   }
 

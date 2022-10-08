@@ -10,9 +10,6 @@ import { getNews } from '../Api'
 export default function Slider3() {
   const [data, setData] = useState(null)
   const [page, setPage] = useState(0)
-  const [sidebar, setSidebar] = useState()
-  const [slider, setSlider] = useState()
-  const [height, setHeight] = useState()
   const [style, setStyle] = useState({
     transform: `translateX(+700px)`,
     opacity: 0,
@@ -39,12 +36,6 @@ export default function Slider3() {
     })
   }, [page])
 
-  useEffect(() => {
-    setHeight(document.querySelector(`.${styles.container}`).clientHeight)
-    setSidebar(document.querySelector(`.${styles.sidebar}`))
-    setSlider(document.querySelector(`.${styles.slider}`))
-  }, [height])
-
   return (
     <div className={styles.container} style={style}>
       <div className={styles.sidebar}>
@@ -54,7 +45,7 @@ export default function Slider3() {
         {data &&
           [...data.results].reverse().map((d, i) => <Slide key={i} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
       </div>
-      {data && sidebar && slider && height && <Button n={data.results.length} sidebar={sidebar} slider={slider} height={height} />}
+      {data && <Button n={data.results.length} />}
       {data && <Button2 setPage={setPage} page={data.nextPage} setStyle={setStyle} />}
     </div>
   )
