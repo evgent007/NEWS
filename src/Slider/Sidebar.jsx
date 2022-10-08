@@ -2,7 +2,7 @@ import { FastAverageColor } from 'fast-average-color'
 import { useState, useEffect, useRef } from 'react'
 import { useInView } from 'framer-motion'
 
-export default function Sidebar({ title, text, url }) {
+export default function Sidebar({ title, text, url, i}) {
   const fac = new FastAverageColor()
   const [style, setStyle] = useState({
     backgroundColor: null,
@@ -39,6 +39,7 @@ export default function Sidebar({ title, text, url }) {
         {title}
       </h1>
       <p>{text}</p>
+      <p>{i}</p>
     </div>
   )
 }

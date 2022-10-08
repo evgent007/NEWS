@@ -39,11 +39,14 @@ export default function Slider3() {
   return (
     <div className={styles.container} style={style}>
       <div className={styles.sidebar}>
-        {data && data.results.map((d, i) => <Sidebar key={i} title={d.title} text={d.pubDate} url={d.image_url ? d.image_url : img} />)}
+        {data &&
+          data.results.map((d, i) => (
+            <Sidebar key={i} i={data.results.length-i} title={d.title} text={d.pubDate} url={d.image_url ? d.image_url : img} />
+          ))}
       </div>
       <div className={styles.slider}>
         {data &&
-          [...data.results].reverse().map((d, i) => <Slide key={i} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
+          [...data.results].reverse().map((d, i) => <Slide key={i} i={i+1} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
       </div>
       {data && <Button n={data.results.length} />}
       {data && <Button2 setPage={setPage} page={data.nextPage} setStyle={setStyle} />}

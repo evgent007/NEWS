@@ -1,10 +1,11 @@
 import styles from './Slider.module.css'
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 
 export default function Button({ n }) {
   const [sidebar, setSidebar] = useState()
   const [slider, setSlider] = useState()
   const [height, setHeight] = useState()
+  const [i, setI] = useState(1)
   let activeSlideIndex = 0
   document.querySelector(`.${styles.sidebar}`).style.top = `-${(n - 1) * 100}vh`
 
@@ -14,7 +15,7 @@ export default function Button({ n }) {
     setSlider(document.querySelector(`.${styles.slider}`))
   }, [height])
 
-  function changeSlide(direction) {
+  const changeSlide = useCallback(direction => {
     if (direction === 'up') {
       activeSlideIndex++
       if (activeSlideIndex === n) {
@@ -27,12 +28,14 @@ export default function Button({ n }) {
       }
     }
     console.log('activeSlideIndex', activeSlideIndex)
+    setI(activeSlideIndex + 1)
 
-    return activeSlideIndex * height
-  }
+    return activeSlideIndex
+  }, [])
 
-  const handleClick = function (d) {
-    const ch = changeSlide(d)
+  const handleClick = d => {
+    const ch = changeSlide(d) * height
+    console.log('ch=', ch, 'i=', i)
     sidebar.style.transform = `translateY(${ch}px)`
     slider.style.transform = `translateY(-${ch}px)`
   }
@@ -49,9 +52,11 @@ export default function Button({ n }) {
     <div className={styles.controls}>
       <button className={styles.downButton} onClick={() => handleClick('down')}>
         <i className="fas fa-arrow-down"></i>
+        {i}
       </button>
       <button className={styles.upButton} onClick={() => handleClick('up')}>
         <i className="fas fa-arrow-up"></i>
+        {i}
       </button>
     </div>
   )
