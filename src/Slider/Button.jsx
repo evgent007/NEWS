@@ -1,19 +1,19 @@
 import styles from './Slider.module.css'
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 export default function Button({ n }) {
   const [sidebar, setSidebar] = useState()
   const [slider, setSlider] = useState()
-  const [height, setHeight] = useState()
+
   const [i, setI] = useState(1)
   let activeSlideIndex = 0
   document.querySelector(`.${styles.sidebar}`).style.top = `-${(n - 1) * 100}vh`
+  // const height = document.querySelector(`.${styles.container}`).offsetHeight
 
   useEffect(() => {
-    setHeight(document.querySelector(`.${styles.container}`).clientHeight)
     setSidebar(document.querySelector(`.${styles.sidebar}`))
     setSlider(document.querySelector(`.${styles.slider}`))
-  }, [height])
+  }, [])
 
   const changeSlide = useCallback(direction => {
     if (direction === 'up') {
@@ -34,6 +34,7 @@ export default function Button({ n }) {
   }, [])
 
   const handleClick = d => {
+    const height = document.querySelector(`.${styles.container}`).offsetHeight
     const ch = changeSlide(d) * height
     console.log('ch=', ch, 'i=', i)
     sidebar.style.transform = `translateY(${ch}px)`
@@ -47,6 +48,8 @@ export default function Button({ n }) {
       handleClick('down')
     }
   })
+
+  // console.log('height2==', height)
 
   return (
     <div className={styles.controls}>

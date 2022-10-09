@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Slide from './Slide'
 import Sidebar from './Sidebar'
 import Button from './Button'
@@ -10,6 +10,7 @@ import { getNews } from '../Api'
 export default function Slider3() {
   const [data, setData] = useState(null)
   const [page, setPage] = useState(0)
+
   const [style, setStyle] = useState({
     transform: `translateX(+700px)`,
     opacity: 0,
@@ -19,6 +20,19 @@ export default function Slider3() {
   // if (data) {
   //   console.log('1data=', data, 'slider=', slider, 'height=', height, 'sidebar=', sidebar)
   // }
+  // useEffect(() => {
+  //   const resizeHandler = () => {
+  //     console.log('ref=', ref.current.offsetHeight)
+  //     const h = ref.current.offsetHeight
+
+  //     setHeight(h)
+  //     window.addEventListener('resize', resizeHandler)
+  //   }
+  //   resizeHandler()
+  //   return () => {
+  //     window.removeEventListener('resize', resizeHandler)
+  //   }
+  // }, [])
 
   useEffect(() => {
     console.log('render page')
@@ -28,7 +42,7 @@ export default function Slider3() {
   }, [page])
 
   useEffect(() => {
-    console.log('render Layout')
+    console.log('render')
     setStyle({
       transform: 'none',
       opacity: 1,
@@ -41,12 +55,14 @@ export default function Slider3() {
       <div className={styles.sidebar}>
         {data &&
           data.results.map((d, i) => (
-            <Sidebar key={i} i={data.results.length-i} title={d.title} text={d.pubDate} url={d.image_url ? d.image_url : img} />
+            <Sidebar key={i} i={data.results.length - i} title={d.title} text={d.pubDate} url={d.image_url ? d.image_url : img} />
           ))}
       </div>
       <div className={styles.slider}>
         {data &&
-          [...data.results].reverse().map((d, i) => <Slide key={i} i={i+1} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
+          [...data.results]
+            .reverse()
+            .map((d, i) => <Slide key={i} i={i + 1} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
       </div>
       {data && <Button n={data.results.length} />}
       {data && <Button2 setPage={setPage} page={data.nextPage} setStyle={setStyle} />}
