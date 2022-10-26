@@ -16,7 +16,7 @@ export default function Slider3() {
     transition: 'all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.6s',
   })
 
-  console.log('data=', data)
+  console.log('data=', data.results)
   useEffect(() => {
 
     getNews(page)
