@@ -1,12 +1,12 @@
 import styles from './Slider.module.css'
 import { useState, useEffect, useCallback } from 'react'
 
-export default function Button({ n, activeSlideIndex }) {
+export default function Button({ n }) {
   const [sidebar, setSidebar] = useState()
   const [slider, setSlider] = useState()
   const [i, setI] = useState(1)
 
-  // let activeSlideIndex = 0
+  let activeSlideIndex = 0
   document.querySelector(`.${styles.sidebar}`).style.top = `-${(n - 1) * 100}vh`
   // const height = document.querySelector(`.${styles.container}`).offsetHeight
 

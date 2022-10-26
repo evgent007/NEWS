@@ -20,7 +20,7 @@ export default function Sidebar({ title, text, url, i }) {
         crossOrigin: 'anonymous', //'use-credentials'|'anonymous'
       })
       .then(color => {
-        console.log(color)
+        console.log('color', color)
 
         setStyle({ backgroundColor: color.hexa, color: color.isDark ? '#fff' : '#000' })
       })

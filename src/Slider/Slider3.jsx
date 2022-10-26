@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import Slide from './Slide'
 import Sidebar from './Sidebar'
 import Button from './Button'
@@ -10,39 +10,22 @@ import { getNews } from '../Api'
 export default function Slider3() {
   const [data, setData] = useState(null)
   const [page, setPage] = useState(0)
-  const [index, setIndex] = useState(0)
   const [style, setStyle] = useState({
     transform: `translateX(+700px)`,
     opacity: 0,
     transition: 'all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.6s',
   })
 
-  // if (data) {
-  //   console.log('1data=', data, 'slider=', slider, 'height=', height, 'sidebar=', sidebar)
-  // }
-  // useEffect(() => {
-  //   const resizeHandler = () => {
-  //     console.log('ref=', ref.current.offsetHeight)
-  //     const h = ref.current.offsetHeight
-
-  //     setHeight(h)
-  //     window.addEventListener('resize', resizeHandler)
-  //   }
-  //   resizeHandler()
-  //   return () => {
-  //     window.removeEventListener('resize', resizeHandler)
-  //   }
-  // }, [])
-
+  console.log('data=', data)
   useEffect(() => {
-    console.log('render page')
+
     getNews(page)
-      .then(dat => setData(dat), setIndex(0))
+      .then(dat => setData(dat))
       .catch(error => console.log('error==>', error.message))
   }, [page])
 
   useEffect(() => {
-    console.log('render')
+
     setStyle({
       transform: 'none',
       opacity: 1,
@@ -64,7 +47,7 @@ export default function Slider3() {
             .reverse()
             .map((d, i) => <Slide key={i} i={i + 1} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
       </div>
-      {data && <Button n={data.results.length} activeSlideIndex={index} />}
+      {data && <Button n={data.results.length}  />}
       {data && <Button2 setPage={setPage} page={data.nextPage} setStyle={setStyle} />}
     </div>
   )
