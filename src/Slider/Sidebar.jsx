@@ -2,7 +2,7 @@ import { FastAverageColor } from 'fast-average-color'
 import { useState, useEffect, useRef } from 'react'
 import { useInView } from 'framer-motion'
 
-export default function Sidebar({ title, text, url, i}) {
+export default function Sidebar({ title, text, url, i }) {
   const fac = new FastAverageColor()
   const [style, setStyle] = useState({
     backgroundColor: null,
@@ -11,19 +11,23 @@ export default function Sidebar({ title, text, url, i}) {
   useEffect(() => {
     fac
       .getColorAsync(url, {
-        mode: 'precision',
-        algorithm: 'sqrt',
-        crossOrigin: 'anonymous', //'use-credentials''anonymous'
+        ignoredColor: [
+          [255, 255, 255, 255], // white
+          [0, 0, 0, 255], // black
+        ],
+        mode: 'precision', //  'precision' | 'speed'
+        algorithm: 'simple', //'simple' | 'sqrt' | 'dominant'
+        crossOrigin: 'anonymous', //'use-credentials'|'anonymous'
       })
       .then(color => {
         console.log(color)
 
-        setStyle({ backgroundColor: color.hexa })
+        setStyle({ backgroundColor: color.hexa, color: color.isDark ? '#fff' : '#000' })
       })
       .catch(e => {
         console.log(e)
       })
-  }, [])
+  }, [url])
 
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false })

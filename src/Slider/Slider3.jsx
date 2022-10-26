@@ -10,7 +10,7 @@ import { getNews } from '../Api'
 export default function Slider3() {
   const [data, setData] = useState(null)
   const [page, setPage] = useState(0)
-
+  const [index, setIndex] = useState(0)
   const [style, setStyle] = useState({
     transform: `translateX(+700px)`,
     opacity: 0,
@@ -37,7 +37,7 @@ export default function Slider3() {
   useEffect(() => {
     console.log('render page')
     getNews(page)
-      .then(dat => setData(dat))
+      .then(dat => setData(dat), setIndex(0))
       .catch(error => console.log('error==>', error.message))
   }, [page])
 
@@ -64,10 +64,8 @@ export default function Slider3() {
             .reverse()
             .map((d, i) => <Slide key={i} i={i + 1} url={d.image_url ? d.image_url : img} link={d.link} page={data.nextPage} />)}
       </div>
-      {data && <Button n={data.results.length} />}
+      {data && <Button n={data.results.length} activeSlideIndex={index} />}
       {data && <Button2 setPage={setPage} page={data.nextPage} setStyle={setStyle} />}
     </div>
   )
 }
-//   console.log('')
-//1

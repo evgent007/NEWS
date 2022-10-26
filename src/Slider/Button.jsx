@@ -1,12 +1,12 @@
 import styles from './Slider.module.css'
 import { useState, useEffect, useCallback } from 'react'
 
-export default function Button({ n }) {
+export default function Button({ n, activeSlideIndex }) {
   const [sidebar, setSidebar] = useState()
   const [slider, setSlider] = useState()
-
   const [i, setI] = useState(1)
-  let activeSlideIndex = 0
+
+  // let activeSlideIndex = 0
   document.querySelector(`.${styles.sidebar}`).style.top = `-${(n - 1) * 100}vh`
   // const height = document.querySelector(`.${styles.container}`).offsetHeight
 
@@ -49,17 +49,15 @@ export default function Button({ n }) {
     }
   })
 
-  // console.log('height2==', height)
-
   return (
     <div className={styles.controls}>
       <button className={styles.downButton} onClick={() => handleClick('down')}>
         <i className="fas fa-arrow-down"></i>
-        {i}
+        {i === 1 ? n : i - 1}
       </button>
       <button className={styles.upButton} onClick={() => handleClick('up')}>
         <i className="fas fa-arrow-up"></i>
-        {i}
+        {i === n ? 1 : i + 1}
       </button>
     </div>
   )
