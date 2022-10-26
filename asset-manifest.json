@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1e1d77e5.css",
+    "main.js": "/static/js/main.ea419e9c.js",
+    "static/media/word-news.jpg": "/static/media/word-news.e24ee6e6290d85cd56b8.jpg",
+    "index.html": "/index.html",
+    "main.1e1d77e5.css.map": "/static/css/main.1e1d77e5.css.map",
+    "main.ea419e9c.js.map": "/static/js/main.ea419e9c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1e1d77e5.css",
+    "static/js/main.ea419e9c.js"
+  ]
+}
